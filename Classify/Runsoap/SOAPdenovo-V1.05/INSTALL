@@ -1,0 +1,16 @@
+
+Installation of SOAPdenovo-V1.05
+
+Ruibang Luo, 2011-2-22
+
+********************************************************************
+
+Pre-configurated Makefile was designed to handle most circumstances.
+
+Simply type "make" at the root of unpacked folder to get 31mer,
+
+63mer and 127mer version binaries installed at root/bin.
+
+For specific environments, Makefiles are located at each folder in 
+
+root/src. 
