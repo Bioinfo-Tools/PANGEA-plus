@@ -132,6 +132,20 @@ Where:
 	-s Classification results (SOAP2)
 	-o Output file (txt)
 
+The output shall look like this:
+
+         #Matches found: 3
+         S000008953	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		92.61	1435	81	23	29	1452	1	1421	0.0	2039
+         #Matches found: 4
+         S000010870	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		91.78	1435	90	26	49	1469	1	1421	0.0	1971
+         #Matches found: 4
+         S000014058	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		92.20	1435	88	22	29	1453	1	1421	0.0	2008
+         #Matches found: 4
+         S000016099	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		91.66	1438	86	29	49	1469	1	1421	0.0	1960
+         #Matches found: 4
+         S000109780	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		91.79	1437	90	28	36	1460	1	1421	0.0	1975
+
+
 #Cluster your results by similarity:
 
 Example for 80% similarity*:
