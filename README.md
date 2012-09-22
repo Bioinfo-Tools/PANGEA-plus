@@ -1,7 +1,11 @@
-#PANGEA-plus
+#PANGEA+
 
-A new implementation of PANGEA pipeline for metagenomics with multiple classification methods and consensus analysis
+A new implementation of PANGEA pipeline for faster and more accurated metagenomics with multiple classification methods and consensus analysis.
 
+
+#Download
+
+            wget https://github.com/Bioinfo-Tools/PANGEA-plus/tarball/master -O BioinfoTools_PANGEA-plus.tar.gz
 
 #Extract the files:
 
@@ -134,7 +138,6 @@ Where:
 
 The output shall look like this:
 
-         #Matches found: 3
          S000008953	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		92.61	1435	81	23	29	1452	1	1421	0.0	2039
          #Matches found: 4
          S000010870	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		91.78	1435	90	26	49	1469	1	1421	0.0	1971
@@ -143,7 +146,6 @@ The output shall look like this:
          #Matches found: 4
          S000016099	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		91.66	1438	86	29	49	1469	1	1421	0.0	1960
          #Matches found: 4
-         S000109780	[0]Bacteria;[1]Firmicutes;[2]Bacilli;[3]Bacillales;[4]Bacillaceae;[5]Bacillus;[6]Bacillus_sp._8A18S6;		91.79	1437	90	28	36	1460	1	1421	0.0	1975
 
 
 #Cluster your results by similarity:
@@ -169,4 +171,6 @@ The classification output should be like this:
             Bacteria	479	4	32	7507	11977	13245	2129	11222	539	2411	
             Eukaryota	1	4	5	5	2	17	78	3	10	3	
             Archaea		1	0	0	0	0	0	0	0	0	1		
+
+#References
 
