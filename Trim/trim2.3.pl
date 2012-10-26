@@ -104,6 +104,15 @@ open( FILETEST, "$read1" );
 read FILETEST, $format, 1;
 #print "$format\n";
 
+$out_dir = dirname($read1);
+$prefix = basename($read1);
+
+# Make output directory, formated to run BLAST
+system("mkdir -p output_files/trim2/");
+
+# Make output file
+open RUNBLAST, ">output_files/trim2/$prefix" . "_runblast.fasta" or die $!;
+
 if ( $format eq ">" ){
     print "FASTA file format found.\n";
     #Read FASTA quality file
@@ -149,17 +158,12 @@ sub parse_qseq {
 
 @split_out1 = split( /\./, $prefix );
 
-$out_dir = dirname($read1);
-$prefix = basename($read1);
+
 
 # Make Singletons Directory
 system("mkdir -p $out_dir/singletons/");
 
-# Make output directory, formated to run BLAST
-system("mkdir -p $out_dir/trim2/");
-
 open SINGLETONS, ">$out_dir/singletons/$prefix" . "_single.txt" or die $!;
-open RUNBLAST, ">$out_dir/trim2/$prefix" . "_runblast.fasta" or die $!;
 
 while ( $read1_line = <READ1> ) {
     chomp( $read1_line );
@@ -385,6 +389,8 @@ sub parse_fastq {
     $fastq1 =~ s/\s//g;
     $fastq2 =~ s/\s//g;
     
+    print RUNBLAST ">$header1:AB\n$fastq1";
+    
     print ">$header1:AB\n$fastq1";
     
 	if ($paired eq 1){
@@ -400,13 +406,20 @@ sub parse_fastq {
 	#Insert the GAP size between paired-ends, fill gap with Ns
 	for ( $r = 0 ; $r < $GAPSIZE ; $r++){
 	    print "N";
+	    print RUNBLAST "N";
 	 }
     
        #FASTA format
        chomp($fastq2);
        print "$fastq2\n";
+       print RUNBLAST "$fastq2\n";
        
-	}
+	}else{
+	    
+	    print "\n";
+	    print RUNBLAST "\n";
+	    
+	    }
     }
     
 
