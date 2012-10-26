@@ -45,7 +45,7 @@ Results will be saved in $PANGEAWD/output/trim2 folder
 
 #Format the database
 
-            $PANGEAWD/Classify/Runblast/formatdb -i $PANGEAWD/nt -p F
+            $PANGEAWD/Classify/Runblast/makeblastdb -in $PANGEAWD/nt -dbtype nucl
 
 #Classify your sequences using parallel BLAST search
 
