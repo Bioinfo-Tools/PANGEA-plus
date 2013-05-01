@@ -53,7 +53,7 @@ $comands = "";
    
 for ($i=0; $i < $count; $i++) {
     
-   $comands = "$comands" . "./Classify/RunBlast/blastn -query $dir$files[$i] -db $database -outfmt 6 -out $files[$i].blastn_putput.txt\n";
+   $comands = "$comands" . "./Classify/RunBlast/blastn -query $dir$files[$i] -db $database -outfmt 6 -out blastn_output_$files[$i].txt\n";
    
     
 }
