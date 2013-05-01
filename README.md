@@ -26,7 +26,7 @@ Your work dir should be set as the PANGEA-plus directory.
 #Install parallel BLAST (for High Performence Computing clusters)
 
     cd $PANGEAWD/Classify/Runblast
-    sh install_MPI-blast.sh
+    sh install_MPI_blast.sh
 
 #Trimming your input sequences
 

@@ -67,7 +67,7 @@ if [ "$OS" == "Darwin" ]; then
     make
 fi
 
-if [ "$OS" == "Linux" ]; then
+if [ "$OS" == "linux" ]; then
     wget https://github.com/Bioinfo-Tools/MPI-blastn/archive/master.zip -O MPI-blastn.zip
     unzip MPI-blastn.zip
     cd MPI-blastn-master/Release/
