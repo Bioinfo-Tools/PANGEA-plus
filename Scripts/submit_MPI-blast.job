@@ -1,0 +1,26 @@
+#!/bin/bash
+###########THIS	IS AN EXAMPLE! PLEASE CHANGE THE DATA BELLOW FOR RUNNING YOUR PARALLEL BLAST###################
+#PBS -q submit
+#PBS -M your_e-mail_adress_here@domain.com
+#PBS -m abe
+#PBS -l nodes=4:ppn=4
+#PBS -r n
+#PBS -l walltime=48:00:00
+#PBS -l pmem=2000mb
+#
+
+##########go to your MPI-blast directory
+
+cd /home/user_name/PANGEA-plus/runblast/
+
+##########THIS GENERATES THE NODES LIST FOR RUNNING PARALLEL PROCESSES WITH MPIRUN
+cat $PBS_NODEFILE > nodes.txt
+
+##########THIS LOADS NEEDED LIBRARIES
+module add ncbi_blast/2.2.26
+module add intel/2012
+module add openmpi/1.6
+
+mpirun -np 16 -machinefile nodes.txt mpiblastn input.fasta ./database_dir/database_name outputfile.txt 4
+
+

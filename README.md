@@ -23,6 +23,10 @@ Your work dir should be set as the PANGEA-plus directory.
     cd BioinfoTools_PANGEA-plus
     export PANGEAWD=$PWD
 
+#Install parallel BLAST (for High Performence Computing clusters)
+
+    cd $PANGEAWD/Classify/Runblast
+    sh install_MPI-blast.sh
 
 #Trimming your input sequences
 
@@ -61,28 +65,32 @@ Results will be saved in $PANGEAWD/output/trim2 folder
 
     cd $PANGEAWD/Classify/Runblast
 
-
 Example of parallel BLAST (MPI-blastn) executed in a PBS/Torque/Maui HPC cluster:
 
-Submit interactive job:
+Use an example submission script available in $PANGEAWD/Scripts directory
 
-    qsub –I -V
+    *EDIT THE FILE submit_MPI-blast.job FIRST!
 
-Create nodes list file:
-
-    cat $PBS_NODEFILE > nodes.txt
-
-Run the parallel BLAST:
-
-    mpirun -np 4 -machinefile nodes.txt mpiblastn input.fasta database.formated $PANGEAWD/parallel_output.txt 12
+    qsub $PANGEAWD/Scripts/submit_MPI-blast.job
 
 where: 	input.fasta refers to your sequences after trimming.
-database.formated is the name of database file. 
-formatted by makeblastdb. 
-12 refers to the total number of processes to be executed by MPI-blastn (nodes x cores).
 
+For running parallel blast for multiple input files at the same time:
 
-Example using your own megablast installation:
+    *EDIT THE FILE submit_multiple_MPI-blast.job FIRST! Follow the instructions in the file.
+
+    *Replace ./dir/ by your input directory and change the values of these parameters before running: "database="; "total_processes="; "nodes="
+    
+    for i in ./dir/*.fasta; do qsub submit_multiple_MPI-blast.job -v in=`echo $i`,out=`echo $i.txt`,database=database_name,nodes=4, total_processes=16; done
+
+where: 
+	./dir/ is your input sequences directory
+	nodes= is the number of requested nodes
+	total_processes= is the total number of processes requested
+	database= is the name of database
+	The output files will have the same name of your inputs, but with .txt suffix.
+
+Example using your own blastn installation:
 
     export PATH=$PANGEAWD/Classify/Runblast:$PATH
     blastn -query input.fasta -db database.formated -outfmt 6 -out blast_output.txt 
