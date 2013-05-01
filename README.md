@@ -21,7 +21,7 @@ A new implementation of PANGEA pipeline for faster and more accurated metagenomi
 Your work dir should be set as the PANGEA-plus directory.
 
     cd BioinfoTools_PANGEA-plus
-    export $PANGEAWD=$PWD
+    export PANGEAWD=$PWD
 
 
 #Trimming your input sequences
@@ -55,7 +55,7 @@ Results will be saved in $PANGEAWD/output/trim2 folder
 
 #Format the database
 
-    $PANGEAWD/Classify/Runblast/formatdb -i $PANGEAWD/nt -p F
+    $PANGEAWD/Classify/Runblast/makeblastdb -in $PANGEAWD/nt -out $PANGEAWD/nt -dbtype nucl
 
 #Classify your sequences using parallel BLAST search
 
@@ -78,13 +78,13 @@ Run the parallel BLAST:
 
 where: 	input.fasta refers to your sequences after trimming.
 database.formated is the name of database file. 
-formatted by formatdb. 
+formatted by makeblastdb. 
 12 refers to the total number of processes to be executed by MPI-blastn (nodes x cores).
 
 
 Example using your own megablast installation:
 
-    megablast -i input.fasta -d database/nt -m 8 -a 4 -o megablast_output.txt -D 3
+    blastn -query input.fasta -db database.formated -outfmt 6 -out blast_output.txt 
 
 #Parse the taxonomic classification based on the NCBI taxonomy databases
 
