@@ -58,14 +58,21 @@ fi
 
 
 if [ "$OS" == "Darwin" ]; then
-    curl --request GET ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.26/ncbi-blast-2.2.26+-universal-macosx.tar.gz -o ncbi-blast-2.2.26+-universal-macosx.tar.gz
-    tar -xvf ncbi-blast-2.2.26+-universal-macosx.tar.gz
-    mv ncbi-blast-2.2.26+/bin/* ./
-    rm -rf ncbi-blast-2.2.26+
+    curl -L https://github.com/Bioinfo-Tools/MPI-blastn/archive/master.zip -o MPI-blastn.zip
+    unzip MPI-blastn.zip
+    cd MPI-blastn-master/Release/
+    mv MPI-blastn-master/Release/* ./
+    rm -rf MPI-blastn-master
+    rm MPI-blastn.zip
+    make
 fi
+
 if [ "$OS" == "Linux" ]; then
-    wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.26/ncbi-blast-2.2.26+-x64-linux.tar.gz -O ncbi-blast-2.2.26+-x64-linux.tar.gz
-    tar -xvf ncbi-blast-2.2.26+-x64-linux.tar.gz
-    mv ncbi-blast-2.2.26+/bin/* ./
-    rm -rf ncbi-blast-2.2.26+
+    wget https://github.com/Bioinfo-Tools/MPI-blastn/archive/master.zip -O MPI-blastn.zip
+    unzip MPI-blastn.zip
+    cd MPI-blastn-master/Release/
+    mv MPI-blastn-master/Release/* ./
+    rm -rf MPI-blastn-master
+    rm MPI-blastn.zip
+    make
 fi
