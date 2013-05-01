@@ -63,7 +63,7 @@ if [ "$OS" == "Darwin" ]; then
     mv ncbi-blast-2.2.26+/bin/* ./
     rm -rf ncbi-blast-2.2.26+
 fi
-if [ "$OS" == "Linux" ]; then
+if [ "$OS" == "linux" ]; then
     wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.26/ncbi-blast-2.2.26+-x64-linux.tar.gz -O ncbi-blast-2.2.26+-x64-linux.tar.gz
     tar -xvf ncbi-blast-2.2.26+-x64-linux.tar.gz
     mv ncbi-blast-2.2.26+/bin/* ./
