@@ -1,6 +1,6 @@
 # !/usr/bin/perl -w
 #################################################
-# run_multi_trim_qseq.pl
+# run_multi_blastn.pl
 # by Raquel Dias
 # Laboratorio de Alto Desempenho (LAD) - PUCRS
 # e-mail: raquel.dias001@acad.pucrs.br

@@ -1,31 +1,30 @@
 # !/usr/bin/perl -w
 #################################################
-# run_multi_trim_qseq.pl
+# run_multi_blastn.pl
 # by Raquel Dias
 # Laboratorio de Alto Desempenho (LAD) - PUCRS
 # e-mail: raquel.dias001@acad.pucrs.br
 #################################################
-# This scripts runs trimming on multiple QSEQ
+# This scripts runs trimming on multiple fasta
 # files inside a same directory
 # Usage:
-# perl run_multi_trim_qseq.pl ../qseq_dir/ extension
-# qseqdir: qseq files directory
-# extension ("qseq" or "txt")
+# perl run_multi_blastn.pl ../fasta_dir/ extension
+# fastadir: fasta files directory
+# extension ("fasta" or "txt")
 #################################################
 
 use Cwd;
 
 
-($dir, $extension) = @ARGV;
+($dir, $database) = @ARGV;
 
-if (!$dir and !$extension) {
+if (!$dir or !$database) {
 print   "
-        run_multi_trim_qseq.pl Usage:
+        run_multi_blastn.pl Usage:
 
-        perl run_multi_trim_qseq.pl ../qseq_dir/ extension
-        
-        qseqdir: qseq files directory (default ./).
-        extension: qseq or txt (default txt).\n\n ";
+        perl run_multi_blastn.pl ../fasta_dir/ database        
+        fastadir: input fasta files directory (default ./).
+        database: path and name to the database file for running Blastn. Example: \$PANGEAWD/database/my_database_name\n\n ";
         
         exit;
 }
@@ -34,7 +33,7 @@ my $wdir = getcwd;
 
 $dir = "." unless $dir;
 
-$lextension = "txt" unless $lextension;
+$extension = "fasta";
 
 chdir( $dir ) or die "Cannot chdir to $dir\n";
    
@@ -54,11 +53,8 @@ $comands = "";
    
 for ($i=0; $i < $count; $i++) {
     
-   $comands = "$comands" . "perl ./Trim/trim2.3.pl -a $dir$files[$i] ";
+   $comands = "$comands" . "./Classify/RunBlast/blastn -query $dir$files[$i] -db $database -outfmt 6 -out $files[$i].blastn_putput.txt\n";
    
-   $i++;
-   
-   $comands = "$comands" . "-b $dir$files[$i] -lc 70 -qc 20 -t 11 -g 189\n";
     
 }
 
