@@ -84,6 +84,7 @@ formatted by makeblastdb.
 
 Example using your own megablast installation:
 
+    export PATH=$PANGEAWD/Classify/Runblast:$PATH
     blastn -query input.fasta -db database.formated -outfmt 6 -out blast_output.txt 
 
 #Parse the taxonomic classification based on the NCBI taxonomy databases
