@@ -21,7 +21,7 @@ module add ncbi_blast/2.2.26
 module add intel/2012
 module add openmpi/1.6
 
-mpirun -np 4 -machinefile nodes.txt mpiblastn input.fasta ./database_dir/database_name outputfile.txt 16
+mpirun -np $nodes -machinefile nodes.txt mpiblastn $in $database $out $total_processes
 
 ####where:
 ####input.fasta is your query or input sequence file in fasta format, already trimmed and filtered.
