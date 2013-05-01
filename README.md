@@ -5,7 +5,13 @@ A new implementation of PANGEA pipeline for faster and more accurated metagenomi
 
 #Download
 
+(LINUX):
+
     wget https://github.com/Bioinfo-Tools/PANGEA-plus/tarball/master -O BioinfoTools_PANGEA-plus.tar.gz
+
+(MAC):
+
+    curl https://github.com/Bioinfo-Tools/PANGEA-plus/tarball/master -o BioinfoTools_PANGEA-plus.tar.gz     
 
 #Extract the files:
 
@@ -36,6 +42,10 @@ Supported formats: FASTA, FASTQ and QSEQ.
 
 Results will be saved in $PANGEAWD/output/trim2 folder
 
+#Download / Install Blast
+
+    cd $PANGEAWD/Classify/Runblast
+    sh install_blast.sh
 
 #Download NCBI database for classification
 
@@ -49,7 +59,8 @@ Results will be saved in $PANGEAWD/output/trim2 folder
 
 #Classify your sequences using parallel BLAST search
 
-    cd $PANGEAWD/Classify/Runblast/Release
+    cd $PANGEAWD/Classify/Runblast
+
 
 Example of parallel BLAST (MPI-blastn) executed in a PBS/Torque/Maui HPC cluster:
 
