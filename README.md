@@ -84,11 +84,11 @@ For running parallel blast for multiple input files at the same time:
     for i in ./dir/*.fasta; do qsub submit_multiple_MPI-blast.job -v in=`echo $i`,out=`echo $i.txt`,database=database_name,nodes=4, total_processes=16; done
 
 where: 
-	./dir/ is your input sequences directory
-	nodes= is the number of requested nodes
-	total_processes= is the total number of processes requested
-	database= is the name of database
-	The output files will have the same name of your inputs, but with .txt suffix.
+./dir/ is your input sequences directory
+nodes= is the number of requested nodes
+total_processes= is the total number of processes requested
+database= is the name of database
+The output files will have the same name of your inputs, but with .txt suffix.
 
 Example using your own blastn installation:
 
