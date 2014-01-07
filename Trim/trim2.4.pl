@@ -310,7 +310,7 @@ $seq = "";
 	if ($first == 1){
 	    $lineSeq2 = <READ2>; $first = 0;
 	    $lineSeq2 =~ s/>//g;
-	    print "$lineSeq1"."_"."$lineSeq2";
+	    print RUNBLAST "$lineSeq1"."_"."$lineSeq2";
 	}
 	
 	
@@ -331,12 +331,12 @@ $seq = "";
         }
 	$header2 = $lineSeq2;
 	
-	print "$seq\n";
+	print RUNBLAST "$seq\n";
 	
 	if ($first == 0 and !eof(READ1)){
 	 chomp($header1);
 	 $header2 =~ s/>//g;
-	 print $header1."_".$header2."header";
+	 print RUNBLAST $header1."_".$header2."header";
 	 $header1="";
 	 $header2="";
 	}
