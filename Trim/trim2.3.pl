@@ -5,9 +5,9 @@
 # Eric Triplett's Group
 # University of Florida
 # Last Modified: December 6, 2011
-# Trim2.2.pl
+# Trim2.3.pl
 # Edited by: Raquel Dias
-# Pontificia Universidade Cat—lica do Rio Grande do Sul - Brazil
+# Pontificia Universidade Catolica do Rio Grande do Sul - Brazil
 # Last modified: February 26, 2012
 ####################################################################
 #
@@ -48,7 +48,7 @@ use File::Basename;
 
 # PARSE ARGUMENTS
 my %parameters;
-getopts( 'a:b:g:t:q:qc:lc:', \%parameters );    #Takes parameters
+getopts( 'a:b:g:t:q:qc:lc:j', \%parameters );    #Takes parameters
 
 unless ( $parameters{a} ) {
     print "Usage: perl trim2.pl 
@@ -58,6 +58,7 @@ unless ( $parameters{a} ) {
 	-t truncate size (if any)
 	-q quality file (in case of FASTA input)
 	-qc quality cutoff value
+	-j use this option for just joining a and b, without triming
 	-lc minimum length \n";
     print "Supported formats: FASTA, FASTQ and QSEQ.\n";
     exit;
@@ -71,7 +72,7 @@ exit;
 
 
 if ( $parameters{b} ) {
-    print "Paired-ends.\n";
+    #print "Paired-ends.\n";
     $paired = 1;
     $read2 = $parameters{b};
 	unless ( open( READ2, "$read2" ) ) {
@@ -114,9 +115,18 @@ system("mkdir -p output_files/trim2/");
 open RUNBLAST, ">output_files/trim2/$prefix" . "_runblast.fasta" or die $!;
 
 if ( $format eq ">" ){
-    print "FASTA file format found.\n";
+    #print "FASTA file format found.\n";
     #Read FASTA quality file
-    if ( $parameters{q} ) {
+    if ( $parameters{j} ){
+	#print "Joining \n\n";
+	if ($paired == 1){
+	join_fasta();
+	exit;    
+	}else{print "Error. Input is -j for joining ends, but you did not provided both sequence a and b with -a and -b options.\n\n"; exit;}
+	
+    }else{
+    
+    if ( $parameters{q}) {
 	print "$parameters{q}\n";
 	$readq = $parameters{q};
 	unless ( open( READQ, "$readq" ) ) {
@@ -125,14 +135,16 @@ if ( $format eq ">" ){
 	}
     #FASTA triming function
     parse_fasta();
-
-    }else {
+    }else{
 	print "Error: Please, specify the FASTA quality file with -q option.\n";
 	exit;
+	
      }
     
+    }
+    
 }elsif ( $format eq "@" ){
-    print "FASTQ file format found.\n";
+    #print "FASTQ file format found.\n";
     #FASTQ triming function
     parse_fastq();
     
@@ -285,6 +297,58 @@ sub trim_qseq() {
     return $seq;
 }
 
+
+sub join_fasta {
+$first = 1;
+$seq = "";
+    while($lineSeq1 = <READ1>) {
+	
+	chomp($lineSeq1);
+	
+	
+	
+	if ($first == 1){
+	    $lineSeq2 = <READ2>; $first = 0;
+	    $lineSeq2 =~ s/>//g;
+	    print "$lineSeq1"."_"."$lineSeq2";
+	}
+	
+	
+	$lineSeq1 = <READ1>;
+	while (grep !/\>/, $lineSeq1 and !eof(READ1)){
+	    chomp $lineSeq1;
+	    $seq = $seq.$lineSeq1;
+	    $lineSeq1 = <READ1>;
+	}
+	
+	$header1 = $lineSeq1;
+	
+	$lineSeq2 = <READ2>;
+	while (grep !/\>/, $lineSeq2 and !eof(READ2)){
+	    chomp $lineSeq2;
+	    $seq = $seq.$lineSeq2;
+	    $lineSeq2 = <READ2>;
+        }
+	$header2 = $lineSeq2;
+	
+	print "$seq\n";
+	
+	if ($first == 0 and !eof(READ1)){
+	 chomp($header1);
+	 $header2 =~ s/>//g;
+	 print $header1."_".$header2."header";
+	 $header1="";
+	 $header2="";
+	}
+	
+	
+	
+
+    
+    
+    }
+    
+}
 
 sub parse_fasta {
 
