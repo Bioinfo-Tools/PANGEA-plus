@@ -54,7 +54,7 @@ $comands = "";
    
 for ($i=0; $i < $count; $i++) {
     
-   $comands = "$comands" . "perl ./Trim/trim2.3.pl -a $dir$files[$i] ";
+   $comands = "$comands" . "perl ./Trim/trim2.4.pl -a $dir$files[$i] ";
    
    $i++;
    
