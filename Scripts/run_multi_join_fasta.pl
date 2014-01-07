@@ -1,4 +1,4 @@
-# !/usr/bin/perl -w
+#!/usr/bin/perl -w
 #################################################
 # run_multi_trim_qseq.pl
 # by Raquel Dias
@@ -58,7 +58,7 @@ for ($i=0; $i < $count; $i++) {
    
    $i++;
    
-   $comands = "$comands" . "-b $dir$files[$i] -lc 70 -qc 20 -t 11 -g 189 -j\n";
+   $comands = "$comands" . "-b $dir$files[$i] -j \n";
     
 }
 
