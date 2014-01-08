@@ -332,6 +332,7 @@ $seq = "";
 	$header2 = $lineSeq2;
 	
 	print RUNBLAST "$seq\n";
+	$seq = "";
 	
 	if ($first == 0 and !eof(READ1)){
 	 chomp($header1);
