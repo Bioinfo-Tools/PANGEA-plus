@@ -323,6 +323,12 @@ $seq = "";
 	
 	$header1 = $lineSeq1;
 	
+	if ( $parameters{g} ){
+	    for($i = 0; $i < $parameters{g}; $i++){
+		$seq = $seq."N";
+	    }
+	}
+	
 	$lineSeq2 = <READ2>;
 	while (grep !/\>/, $lineSeq2 and !eof(READ2)){
 	    chomp $lineSeq2;
@@ -331,7 +337,11 @@ $seq = "";
         }
 	$header2 = $lineSeq2;
 	
+	
+	
 	print RUNBLAST "$seq\n";
+	
+	
 	$seq = "";
 	
 	if ($first == 0 and !eof(READ1)){
