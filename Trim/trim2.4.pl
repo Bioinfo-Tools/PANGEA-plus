@@ -337,7 +337,7 @@ $seq = "";
 	if ($first == 0 and !eof(READ1)){
 	 chomp($header1);
 	 $header2 =~ s/>//g;
-	 print RUNBLAST $header1."_".$header2."header";
+	 print RUNBLAST $header1."_".$header2;
 	 $header1="";
 	 $header2="";
 	}
