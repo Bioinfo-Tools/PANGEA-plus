@@ -303,55 +303,75 @@ $first = 1;
 $seq = "";
     while($lineSeq1 = <READ1>) {
 	
+	
+	
 	chomp($lineSeq1);
+	
+	if ($first == 0){
+	 chomp($header1);chomp($header2);
+	 $header2 =~ s/>//g;
+	 print RUNBLAST $header1."_".$header2."\n";
+
+	}
 	
 	
 	
 	if ($first == 1){
 	    $lineSeq2 = <READ2>; $first = 0;
-	    $lineSeq2 =~ s/>//g;
-	    print RUNBLAST "$lineSeq1"."_"."$lineSeq2";
+	    $lineSeq2_tmp = $lineSeq2;
+	    $lineSeq2_tmp =~ s/>//g;
+	    print RUNBLAST "$lineSeq1"."_"."$lineSeq2_tmp";
+	    $lineSeq1 = <READ1>;
+	    
 	}
 	
-	
-	$lineSeq1 = <READ1>;
-	while (grep !/\>/, $lineSeq1 and !eof(READ1)){
+	while (grep !/\>/, $lineSeq1){
 	    chomp $lineSeq1;
-	    $seq = $seq.$lineSeq1;
+	    $seq .= $lineSeq1;
+	    #print "aa $seq\n";
 	    $lineSeq1 = <READ1>;
+	    if(eof(READ1)){last;}
 	}
 	
 	$header1 = $lineSeq1;
 	
+	
 	if ( $parameters{g} ){
 	    for($i = 0; $i < $parameters{g}; $i++){
-		$seq = $seq."N";
+		$seq .= "N";
 	    }
 	}
 	
 	$lineSeq2 = <READ2>;
-	while (grep !/\>/, $lineSeq2 and !eof(READ2)){
+	while (grep !/\>/, $lineSeq2){
 	    chomp $lineSeq2;
-	    $seq = $seq.$lineSeq2;
+	    $seq .= $lineSeq2;
+	    #print "bb $lineSeq2\n";
 	    $lineSeq2 = <READ2>;
+	    if(eof(READ2)){last;}
         }
 	$header2 = $lineSeq2;
 	
 	
 	
+
+	
+	
+	#print "cc $seq\n";
 	print RUNBLAST "$seq\n";
 	
 	
-	$seq = "";
 	
-	if ($first == 0 and !eof(READ1)){
-	 chomp($header1);
-	 $header2 =~ s/>//g;
-	 print RUNBLAST $header1."_".$header2;
-	 $header1="";
-	 $header2="";
-	}
 	
+	
+	
+	$seq = "";	
+	
+
+
+	
+	
+
 	
 	
 
