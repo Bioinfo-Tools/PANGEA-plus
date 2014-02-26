@@ -23,7 +23,7 @@ Your work dir should be set as the PANGEA-plus directory.
     cd BioinfoTools_PANGEA-plus
     export PANGEAWD=$PWD
 
-#Install parallel BLAST (for High Performence Computing clusters)
+#Install parallel BLAST (for High Performance Computing clusters)
 
     cd $PANGEAWD/Classify/Runblast
     sh install_MPI_blast.sh
