@@ -169,9 +169,9 @@ The output shall look like this:
          #Matches found: 4
 
 
-#Cluster your results by similarity:
+#Cluster your results by identity:
 
-Example for 80% similarity*:
+Example for 80% identity*:
 
     perl $PANGEAWD/Megaclust/megaclust2.pl -i $PANGEAWD/output_consensus.txt -o $PANGEAWD/output_consensus.megaclust_80_hits.txt -b 100 -s 80 -e 1e-20
 
